@@ -9,7 +9,7 @@ services:
     ports:
       - "9443:9443"
     environment:
-      - HOSTNAME: 'copper.opensource.lk'
+      HOSTNAME: 'localhost.com'
     depends_on:
       - openldap
 
