@@ -1,0 +1,51 @@
+version: '3'
+
+services:
+  is:
+    build: 
+      context: ./is
+    image: copper-is
+    container_name: copper-is
+    ports:
+      - "9443:9443"
+    environment:
+      - HOSTNAME: 'copper.opensource.lk'
+    depends_on:
+      - openldap
+
+  openldap:
+    build:
+      context: ./openldap
+    image: copper-openldap
+    container_name: copper-openldap
+    environment:
+      LDAP_DOMAIN: 'copper.opensource.lk'
+    tty: true
+    stdin_open: true
+    ports:
+      - "389:389"
+      - "636:636"
+    domainname: "copper.opensource.lk" # important: same as hostname
+    hostname: "copper.opensource.lk"
+
+    # cn=admin,dc=copper,dc=opensource,dc=lk
+
+  phpldapadmin:
+    image: osixia/phpldapadmin:latest
+    container_name: phpldapadmin
+    environment:
+      PHPLDAPADMIN_LDAP_HOSTS: "openldap"
+      PHPLDAPADMIN_HTTPS: "false"
+    ports:
+      - "8080:80"
+    depends_on:
+      - openldap # service name
+
+  # mysql:
+  #   image: mysql/mysql-server:5.7
+  #   container_name: mysql
+  #   environment:
+  #     MYSQL_ROOT_PASSWORD: "toor"
+  #     MYSQL_DATABASE: "wso2is"
+  #   ports:
+  #     - "3306:3306"
