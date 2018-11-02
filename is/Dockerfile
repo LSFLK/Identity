@@ -17,15 +17,12 @@
 # ------------------------------------------------------------------------
 
 # set to latest Alpine
-FROM mrclemrkz/wso2is:5.7
+FROM wso2/wso2is:5.7.0
 # MAINTAINER Clement Fernando "info@mrclemrkz.com”
 
 # set user configurations
 ARG USER=wso2carbon
 ARG USER_HOME=/home/${USER}
-
-# set dependant files directory
-ARG CONFIG=./config
 
 # set wso2 product configurations
 ARG WSO2_SERVER=wso2is
@@ -33,10 +30,20 @@ ARG WSO2_SERVER_VERSION=5.7.0
 ARG WSO2_SERVER_PACK=${WSO2_SERVER}-${WSO2_SERVER_VERSION}
 ARG WSO2_SERVER_HOME=${USER_HOME}/${WSO2_SERVER_PACK}
 ARG WSO2_SERVER_CONF=${WSO2_SERVER_HOME}/repository/conf
+ARG WSO2_SERVER_SECURITY=${WSO2_SERVER_HOME}/repository/resources/security
 
-# change cofiguration
-COPY --chown=wso2carbon:wso2 ${CONFIG}/carbon.xml ${WSO2_SERVER_CONF}/
-COPY --chown=wso2carbon:wso2 ${CONFIG}/tenant-mgt.xml ${WSO2_SERVER_CONF}/
-COPY --chown=wso2carbon:wso2 ${CONFIG}/user-mgt.xml ${WSO2_SERVER_CONF}/
+
+#set JVM memory heap to 2GB for production. Default is to 1GB.
+COPY --chown=wso2carbon:wso2 ./files/wso2server.sh ${WSO2_SERVER_HOME}/bin
+
+# update keystores
+COPY --chown=wso2carbon:wso2 ./files/wso2carbon.jks ${WSO2_SERVER_SECURITY}/
+COPY --chown=wso2carbon:wso2 ./files/client-truststore.jks ${WSO2_SERVER_SECURITY}/
+
+# conecting external ldap
+COPY --chown=wso2carbon:wso2 ./config/carbon.xml ${WSO2_SERVER_CONF}/
+COPY --chown=wso2carbon:wso2 ./config/tenant-mgt.xml ${WSO2_SERVER_CONF}/
+COPY --chown=wso2carbon:wso2 ./config/user-mgt.xml ${WSO2_SERVER_CONF}/
+
 # for claim mapping mismatch on "urn:ietf:params:scim:schemas:core:2.0:meta.resourceType" 
-COPY --chown=wso2carbon:wso2 ${CONFIG}/claim-config.xml ${WSO2_SERVER_CONF}/
+COPY --chown=wso2carbon:wso2 ./config/claim-config.xml ${WSO2_SERVER_CONF}/

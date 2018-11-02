@@ -205,7 +205,7 @@
             <Property name="MaxUserNameListLength">100</Property>
             <Property name="MaxRoleNameListLength">100</Property>
             <Property name="kdcEnabled">false</Property>
-            <Property name="defaultRealmName">${HOSTNAME}</Property>
+            <Property name="defaultRealmName">localhost.com</Property>
             <Property name="UserRolesCacheEnabled">true</Property>
             <Property name="ConnectionPoolingEnabled">false</Property>
             <Property name="LDAPConnectionTimeout">5000</Property>
