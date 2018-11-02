@@ -16,3 +16,8 @@
 /docs/_site
 /README.rst
 /*venv
+
+
+# keep away keystore files
+is/files/*.jks
+is/files/*.pem

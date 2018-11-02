@@ -30,10 +30,15 @@ ARG WSO2_SERVER_VERSION=5.7.0
 ARG WSO2_SERVER_PACK=${WSO2_SERVER}-${WSO2_SERVER_VERSION}
 ARG WSO2_SERVER_HOME=${USER_HOME}/${WSO2_SERVER_PACK}
 ARG WSO2_SERVER_CONF=${WSO2_SERVER_HOME}/repository/conf
+ARG WSO2_SERVER_SECURITY=${WSO2_SERVER_HOME}/repository/resources/security
 
 
 #set JVM memory heap to 2GB for production. Default is to 1GB.
 COPY --chown=wso2carbon:wso2 ./files/wso2server.sh ${WSO2_SERVER_HOME}/bin
+
+# update keystores
+COPY --chown=wso2carbon:wso2 ./files/wso2carbon.jks ${WSO2_SERVER_SECURITY}/
+COPY --chown=wso2carbon:wso2 ./files/client-truststore.jks ${WSO2_SERVER_SECURITY}/
 
 # conecting external ldap
 COPY --chown=wso2carbon:wso2 ./config/carbon.xml ${WSO2_SERVER_CONF}/
