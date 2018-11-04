@@ -17,14 +17,14 @@ services:
     image: copper-openldap
     container_name: copper-openldap
     environment:
-      LDAP_DOMAIN: 'copper.opensource.lk'
+      LDAP_DOMAIN: "copper.opensource.lk"
     tty: true
     stdin_open: true
     ports:
       - "389:389"
       - "636:636"
-    domainname: "copper.opensource.lk" # important: same as hostname
-    hostname: "copper.opensource.lk"
+    # domainname: "copper-openldap" # important: same as hostname
+    # hostname: "copper-openldap"
 
     # cn=admin,dc=copper,dc=opensource,dc=lk
 

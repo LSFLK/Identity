@@ -41,6 +41,7 @@ COPY --chown=wso2carbon:wso2 ./files/wso2carbon.jks ${WSO2_SERVER_SECURITY}/
 COPY --chown=wso2carbon:wso2 ./files/client-truststore.jks ${WSO2_SERVER_SECURITY}/
 
 # conecting external ldap
+COPY --chown=wso2carbon:wso2 ./config/embedded-ldap.xml ${WSO2_SERVER_CONF}/identity/
 COPY --chown=wso2carbon:wso2 ./config/carbon.xml ${WSO2_SERVER_CONF}/
 COPY --chown=wso2carbon:wso2 ./config/tenant-mgt.xml ${WSO2_SERVER_CONF}/
 COPY --chown=wso2carbon:wso2 ./config/user-mgt.xml ${WSO2_SERVER_CONF}/
