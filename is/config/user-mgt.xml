@@ -170,7 +170,7 @@
         -->
         <UserStoreManager class="org.wso2.carbon.user.core.ldap.ReadWriteLDAPUserStoreManager">
             <Property name="TenantManager">org.wso2.carbon.user.core.tenant.CommonHybridLDAPTenantManager</Property>
-            <Property name="ConnectionURL">ldap://copper-openldap:389</Property>
+            <Property name="ConnectionURL">ldap://openldap:389</Property>
             <Property name="ConnectionName">cn=admin,dc=copper,dc=opensource,dc=lk</Property>
             <Property name="ConnectionPassword">admin</Property>
             <Property name="AnonymousBind">false</Property>
@@ -205,7 +205,7 @@
             <Property name="MaxUserNameListLength">100</Property>
             <Property name="MaxRoleNameListLength">100</Property>
             <Property name="kdcEnabled">false</Property>
-            <Property name="defaultRealmName">WSO2.ORG</Property>
+            <Property name="defaultRealmName">openldap</Property>
             <Property name="UserRolesCacheEnabled">true</Property>
             <Property name="ConnectionPoolingEnabled">false</Property>
             <Property name="LDAPConnectionTimeout">5000</Property>

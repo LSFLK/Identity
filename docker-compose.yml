@@ -23,8 +23,6 @@ services:
     ports:
       - "389:389"
       - "636:636"
-    # domainname: "copper-openldap" # important: same as hostname
-    # hostname: "copper-openldap"
 
     # cn=admin,dc=copper,dc=opensource,dc=lk
 
