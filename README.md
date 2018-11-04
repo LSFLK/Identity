@@ -1,9 +1,9 @@
-### Identity
-Identity management 
+# Identity
+Identity management system for copper-mail.
 
 ## Prerequisite
 
-# update configs
+### update configs
 
 replace 'domain.com' with your ipaddress or domain name.
 
@@ -13,22 +13,17 @@ carbon.xml >>>
 <MgtHostName>domain.com</MgtHostName>
 ```
 
-user-mgt.xml >>>
-```
-<Property name="defaultRealmName">localhost.com</Property>
-```
-
-# create keystores
+### create keystores
 
 Move to folder 'is/files/'
 ```
 cd is/files
 ```
 
-Run the following command and make sure to use;
-first and last name? -> ipaddress or domain name
-organizational unit -> Users
-password -> wso2carbon
+Run the following command and make sure to use:  
+first and last name? -> ipaddress or domain name  
+organizational unit -> Users  
+password -> wso2carbon  
 ```
 keytool -genkey -alias wso2carbon -keyalg RSA -keystore wso2carbon.jks -keysize 2048
 ```
@@ -42,6 +37,17 @@ keytool -import -alias wso2 -file publickey.pem -keystore client-truststore.jks 
 
 ## How to use
 
+To build and up the server
 ```
-# sh docker-up.sh
+# sh start.sh
 ```
+
+To stop and remove all containers and along with built images
+```
+# sh reset.sh
+```
+
+## Test run
+
+1) Create a user and add all permission.
+2) Goto <base-url>/dashboard and try login in successfully.
