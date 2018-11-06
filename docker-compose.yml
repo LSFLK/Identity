@@ -1,16 +1,6 @@
 version: '3'
 
 services:
-  is:
-    build: 
-      context: ./is
-    image: copper-is
-    container_name: copper-is
-    ports:
-      - "9443:9443"
-    depends_on:
-      - openldap
-
   openldap:
     build:
       context: ./openldap
@@ -36,6 +26,16 @@ services:
       - "8080:80"
     depends_on:
       - openldap # service name
+
+  is:
+    build: 
+      context: ./is
+    image: copper-is
+    container_name: copper-is
+    ports:
+      - "9443:9443"
+    depends_on:
+      - openldap
 
   # mysql:
   #   image: mysql/mysql-server:5.7
