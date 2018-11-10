@@ -62,7 +62,7 @@ keytool -import -alias wso2 -file publickey.pem -keystore client-truststore.jks 
 ```
 
 
-## How to use
+## Running
 
 To build and up the server
 ```
@@ -74,7 +74,7 @@ To stop and remove all containers and along with built images
 # sh reset.sh
 ```
 
-Give it a minute or 2, to WSO2 Identity Server to start up.
+Give it a minute or 2, for WSO2 Identity Server to start up.
 
 Run `docker logs copper-is` to find server url in the end of the logs to be recognized as the server started successfully.
 
@@ -86,7 +86,7 @@ docker-compose up -d
 ```
 
 
-## Test run
+## Testing
 
 On production environment replace 'localhost.com' with server ip or domain name. You may always use the server started URL on IS docker logs using `docker logs copper-is` which is found right after the server has started.
 
