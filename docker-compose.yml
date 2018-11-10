@@ -1,30 +1,18 @@
 version: '3'
 
 services:
-  is:
-    build: 
-      context: ./is
-    image: copper-is
-    container_name: copper-is
-    ports:
-      - "9443:9443"
-    depends_on:
-      - openldap
-
   openldap:
     build:
       context: ./openldap
     image: copper-openldap
     container_name: copper-openldap
     environment:
-      LDAP_DOMAIN: 'copper.opensource.lk'
+      LDAP_DOMAIN: "copper.opensource.lk"
     tty: true
     stdin_open: true
     ports:
       - "389:389"
       - "636:636"
-    domainname: "copper.opensource.lk" # important: same as hostname
-    hostname: "copper.opensource.lk"
 
     # cn=admin,dc=copper,dc=opensource,dc=lk
 
@@ -38,6 +26,16 @@ services:
       - "8080:80"
     depends_on:
       - openldap # service name
+
+  is:
+    build: 
+      context: ./is
+    image: copper-is
+    container_name: copper-is
+    ports:
+      - "9443:9443"
+    depends_on:
+      - openldap
 
   # mysql:
   #   image: mysql/mysql-server:5.7
